@@ -1,0 +1,12 @@
+Package: QQperm
+Type: Package
+Title: Permutation Based QQ Plot and Inflation Factor Estimation
+Version: 0.1
+Date: 2015-12-12
+Author: Slave Petrovski and Quanli Wang
+Maintainer: Quanli Wang <quanli@stat.duke.edu>
+Description: This package provides utility functions for permutation based inflation factor estimation and QQ plot.While the utility can be used in general cases, it is particular helpful in situation where there is significant lambda inflation arising from imbalanced case/control sample sizes.
+License: GPL (>= 2)
+Depends: R (>= 3.1.0)
+LazyData: TRUE
+RoxygenNote: 5.0.1
