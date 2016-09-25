@@ -10,9 +10,6 @@
     \item{perm}{A vector for expected P-values.}
    \item{observed}{A vector for observed P-values.}
 }}
-\source{
-\url{http://ask.slave.for.it/}
-}
 \usage{
 example.Ps
 }

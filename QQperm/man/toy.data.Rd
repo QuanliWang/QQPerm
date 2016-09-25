@@ -10,9 +10,6 @@
     \item{data}{a named data matrix, with rows for genes and columns for samples. Each cell in the matrix represent the counts of variants for given (gene,sample) pair.}
    \item{is.case}{case/control indicator. The order of indicators must matches that of the samples defined in data matrix.}
 }}
-\source{
-\url{http://ask.slave.for.it/}
-}
 \usage{
 toy.data
 }
