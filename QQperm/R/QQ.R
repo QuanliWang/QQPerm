@@ -43,7 +43,7 @@ estlambda2 <-function (p.o, p.e, plot = FALSE, filter = TRUE, adjust.xy = FALSE,
     warning(paste("number of points is too small:", ntp))
    p.o[p.o>1] = 1
    p.e[p.e>1] = 1
-  
+
    p.o <- qchisq(p.o, 1, lower.tail = FALSE)
    p.e <- qchisq(p.e, 1, lower.tail = FALSE)
 
@@ -64,8 +64,8 @@ estlambda2 <-function (p.o, p.e, plot = FALSE, filter = TRUE, adjust.xy = FALSE,
 
   if (plot) {
     lim <- c(0, max(p.o, p.e, na.rm = TRUE))
-    oldmargins <- par()$mar
-    par(mar = oldmargins + 0.2, cex=0.5)
+    #oldmargins <- par()$mar
+    #par(mar = oldmargins + 0.2, cex=1.5)
     if (adjust.xy) {
       xlim <- c(0,round(max(p.e) + 1))
       ylim <- c(0,round(max(p.o) + 1))
@@ -76,21 +76,18 @@ estlambda2 <-function (p.o, p.e, plot = FALSE, filter = TRUE, adjust.xy = FALSE,
     }
 
     #default parameters
-    def_args <- list(pch=1, xlim=xlim, ylim=ylim,
+    def_args <- list(pch=16, xlim=xlim, ylim=ylim,
                      xlab = expression("Expected " ~ chi^2),
-                     ylab = expression("Observed " ~ chi^2)
-    )
+                     ylab = expression("Observed " ~ chi^2),...)
+
 
     ## Next, get a list of ... arguments
     dotargs <- list(...)
-    #dotargs <- dotargs[!names(dotargs) %in% c('adjust.xy','filter','plot')]
 
     ## And call the plot function passing NA, your ... arguments, and the default
     ## arguments that were not defined in the ... arguments.
     tryCatch(do.call("plot", c(list(x=p.e, y=p.o), def_args[!names(def_args) %in% names(dotargs)], dotargs)), warn=stop)
 
-    #plot(p.e, p.o, xlab = expression("Expected " ~ chi^2),
-    #     ylab = expression("Observed " ~ chi^2), xlim = xlim, ylim = ylim,...)
     abline(a = 0, b = 1)
     abline(a = 0, b = out$estimate, col = "red")
     rp = vector('expression',1)
@@ -102,7 +99,7 @@ estlambda2 <-function (p.o, p.e, plot = FALSE, filter = TRUE, adjust.xy = FALSE,
     rp[1] = substitute(expression(lambda == MYVALUE),
                        list(MYVALUE = format(out$estimate,dig=dig)))[2]
     legend('top', legend = rp, bty = 'n')
-    par(mar = oldmargins)
+    #par(mar = oldmargins)
   }
   out
 }
@@ -146,10 +143,9 @@ qqplot <- function(P.perm, P.observed,adjust.xy = TRUE,...) {
   }
 
   #default parameters
-  def_args <- list(pch=1, xlim=xlim, ylim=ylim,
-                   xlab=expression(Expected~~-log[10](italic(p))),
-                   ylab=expression(Observed~~-log[10](italic(p)))
-  )
+  def_args <- list(pch=16, xlim=xlim, ylim=ylim,
+                   xlab = expression("Expected " ~ chi^2),
+                   ylab = expression("Observed " ~ chi^2),...)
 
   ## Next, get a list of ... arguments
   dotargs <- list(...)
