@@ -79,7 +79,7 @@ igm.get.pvalues <-function(matrix, is.case, n.permutations = 1000) {
   }
   #P.perm <- rowMeans(P.Values)
   #P.perm <- sapply(P.Values,median)
-  p.perm <- sapply(P.Values, function(x) quantile(x,c(0.025, 0.50, 0.975)))
+  P.perm <- sapply(P.Values, function(x) quantile(x,c(0.025, 0.50, 0.975)))
 
 
   #compute observed (true case control configration) p-values
