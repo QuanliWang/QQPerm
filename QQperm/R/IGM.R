@@ -1,17 +1,17 @@
-#' Read sample file and genotype collipsing matrix in IGM format.
+#' Read sample file and genotype collapsing matrix in IGM (Insitute for Genomic Medicine, Columbia University) format.
 #'
 #' @author Slave Petrovski and Quanli Wang
 #' @param sample.file The input sample file.
 #' @param matrix.file The input matrix file.
-#' @param filter.list A list of genes that will be excluded from the analysis.
+#' @param filter.list An optional list of genes to exclude from the analysis.
 #'
-#' @return Returns A list contains data matrix (matrix) and phenotype indicators (is.case).
+#' @return Returns a list containing the data matrix (matrix) and case(1)/control(0) phenotype indicators (is.case).
 #'
 #' @examples
 #' #igm.data <- igm.read.data(sample.file, matrix.file)
 #'
 igm.read.data <- function(sample.file, matrix.file, filter.list = NULL) {
-  #get sample and phenotype info
+  #get sample and phenotype label information
   ped <- read.table(sample.file,header = FALSE, sep = '\t', as.is = TRUE)
   samples <- ped[,2]
   is.case <- as.matrix(ped[,6] ==2)
@@ -37,13 +37,13 @@ igm.read.data <- function(sample.file, matrix.file, filter.list = NULL) {
   out
 }
 
-#' Generate NULL distribution of P-values through label switching and permutation and compute distribution of observed P-values.
+#' The permutation-based empirical NULL distribution of P-values is generated through label switching and permutation of the true case/control assignment. To achieve this, for a given matrix it randomly permutes the case and control labels of the original configuration and then recomputes the two-tail Fisher's Exact test for all genes. This is repeated n.permutation (e.g., 1000) times. For each of the n.permutations the p-values are ordered and then the mean of each rank-ordered estimate is taken across the n.permutations, i.e., the average 1st order statistic, the average 2nd order statistic, etc. These then represent the empirical estimates of the expected ordered p-values (expected -log10(p-values)). This empirical-based expected p-value distribution no longer depends on an assumption that the p-values are uniformly distributed under the null.
 #' @author Slave Petrovski and Quanli Wang
 #' @param matrix The input genotype matrix, with rows for genes and columns for samples.
-#' @param is.case The case/control indicator.
-#' @param n.permutations Number of label permutaitons.
+#' @param is.case The case(1)/control(0) indicator.
+#' @param n.permutations The number of label permutations requested. Recommended number is 1,000.
 #'
-#' @return Returns A list contains observed P-values (observed) and permuted P-Values for NULL distribution (perm).
+#' @return Returns a list containing the observed P-values based on the correct case/control assignment (observed) and the permuted P-Values reflecting the appropriate NULL distribution for the given case/control configuration (perm).
 #'
 #' @examples
 #' #Ps  <- igm.get.pvalues(matrix, is.case)
@@ -54,7 +54,7 @@ igm.get.pvalues <-function(matrix, is.case, n.permutations = 1000) {
   n.cases <- sum(is.case)
   n.controls <- n.samples - n.cases
 
-  #pre-compute all possible contingency.table for perofrmance
+  #pre-compute all possible contingency.table for performance
   #this will create a look up table
   contingency.table = matrix(0,2,2)
   Fisher.precompute <- matrix(0, n.cases + 1, max(rowSums(matrix)) + 1)
@@ -68,7 +68,7 @@ igm.get.pvalues <-function(matrix, is.case, n.permutations = 1000) {
     }
   }
 
-  #permutaiton, save all p-values just in case median will be needed later on
+  #permutation, save all p-values just in case median will be needed later on
   P.Values <- matrix(1,dim(matrix)[1],n.permutations)
   total.1 <- rowSums(matrix)
   for (i in 1: n.permutations) {
@@ -80,7 +80,7 @@ igm.get.pvalues <-function(matrix, is.case, n.permutations = 1000) {
   P.perm <- rowMeans(P.Values)
 
 
-  #compute observed p values
+  #compute observed (true case control configration) p-values
   K <- which(is.case)
   Labels.1.1 <- rowSums(matrix[,K])
   Labels.0.1 <- total.1 - Labels.1.1

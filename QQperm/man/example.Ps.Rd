@@ -3,18 +3,18 @@
 \docType{data}
 \name{example.Ps}
 \alias{example.Ps}
-\title{Distributions of expected and observed P-values from igm.data data set.}
-\format{A list contains both expected and observed P-values.
+\title{Distributions of expected and observed P-values from the igm.data dataset.}
+\format{A list containing both the observed and the permutation-based expected P-Values.
 
  \describe{
-    \item{perm}{A vector for expected P-values.}
-   \item{observed}{A vector for observed P-values.}
+   \item{observed}{A vector for observed P-values from the true case/control assignments.}
+   \item{perm}{A vector for expected P-values (permutation-based expected p-value distribution).}
 }}
 \usage{
 example.Ps
 }
 \description{
-Distributions of expected and observed P-values from igm.data data set.
+Distributions of expected and observed P-values from the igm.data dataset.
 }
 \keyword{datasets}
 

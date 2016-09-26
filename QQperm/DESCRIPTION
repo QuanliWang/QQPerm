@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2016-09-25
 Author: Slave Petrovski and Quanli Wang
 Maintainer: Quanli Wang <quanli@stat.duke.edu>
-Description: This package provides utility functions for permutation based inflation factor estimation and QQ plot.While the utility can be used in general cases, it is particular helpful in situation where there is significant lambda inflation arising from imbalanced case/control sample sizes.
+Description: Provides users the necessary utility functions to generate permutation-based QQ plots and also estimate inflation factor based on the empirical NULL distribution. While it has general utility, it is particularly helpful when the skewness of the Fisher's Exact test in sparse data situations with imbalanced case-control sample sizes renders the reliance on the uniform chi-square expected distribution inappropriate.
 License: GPL (>= 2)
 Depends: R (>= 3.1.0)
 LazyData: TRUE

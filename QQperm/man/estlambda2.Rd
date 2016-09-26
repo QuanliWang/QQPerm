@@ -2,14 +2,14 @@
 % Please edit documentation in R/QQ.R
 \name{estlambda2}
 \alias{estlambda2}
-\title{Estimate the inflation factor for a distribution of P-values or 1df chi-square test.}
+\title{Estimate the inflation factor for a distribution of observed P-values or 1-df chi-square test.}
 \usage{
 estlambda2(p.o, p.e, plot = FALSE, filter = TRUE, adjust.xy = FALSE, ...)
 }
 \arguments{
-\item{p.o}{Observed P-values from the data.}
+\item{p.o}{Observed P-values from the data (true case/control assignments).}
 
-\item{p.e}{Expected P-values from the NULL distribution, usually obtained through label permutations of the data.}
+\item{p.e}{Expected P-values from the NULL distribution, usually obtained through label permutations of the matrix data.}
 
 \item{plot}{Indicate if a plot should be produced.}
 
@@ -17,17 +17,16 @@ estlambda2(p.o, p.e, plot = FALSE, filter = TRUE, adjust.xy = FALSE, ...)
 
 \item{adjust.xy}{Indicate if the x-axis and y-axis should be adjusted to their own range.}
 
-\item{...}{arguments passed the plot function.}
+\item{...}{Additional arguments passed to the plot function.}
 }
 \value{
-Returns a list containing the estimated lambda value (estimate) and its standard deviation (se).
+Returns a list containing the permutation-based estimated lambda value (estimate) and its standard error (se).
 }
 \description{
-Estimate the inflation factor for a distribution of P-values or 1df chi-square test using a NULL distribution of P-values provided by user.
- The implementation is similar to the default implementation in GenABEL but does not assume the NULL distribution of P-values to be uniform.
+Estimate the inflation factor for a distribution of P-values or 1-df chi-square test using a permutation-based NULL distribution of P-values provided by the package/user.  The implementation is similar to the default (estlambda) implementation in R package GenABEL but here it does not assume the NULL distribution of P-values to be uniform. Rather it estimates lambda inflation factor by comparing to the permutation-based expected NULL distribution as described for QQ plots. This is thus more representative of the true NULL distribution of Fisher's Exact p-values for the given case-control configuration in a study.
 }
 \examples{
-#load pre-computed p-values for igm dataset
+#load pre-computed p-values for IGM dataset
 library(QQperm)
 data("example.Ps")
 

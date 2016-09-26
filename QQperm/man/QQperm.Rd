@@ -5,9 +5,9 @@
 \alias{QQperm}
 \alias{QQperm-package}
 \alias{qqperm}
-\title{QQperm: A package for inflation factor estimation and QQ plot.}
+\title{QQperm: A package for permutation-based QQ plots and inflation factor estimates.}
 \description{
-QQperm: A package for inflation factor estimation and QQ plot.
+QQperm: A package for permutation-based QQ plots and inflation factor estimates.
 }
 \author{
 Slave Petrovski and Quanli Wang

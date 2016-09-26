@@ -2,7 +2,7 @@
 % Please edit documentation in R/IGM.R
 \name{igm.read.data}
 \alias{igm.read.data}
-\title{Read sample file and genotype collipsing matrix in IGM format.}
+\title{Read sample file and genotype collapsing matrix in IGM (Insitute for Genomic Medicine, Columbia University) format.}
 \usage{
 igm.read.data(sample.file, matrix.file, filter.list = NULL)
 }
@@ -11,13 +11,13 @@ igm.read.data(sample.file, matrix.file, filter.list = NULL)
 
 \item{matrix.file}{The input matrix file.}
 
-\item{filter.list}{A list of genes that will be excluded from the analysis.}
+\item{filter.list}{An optional list of genes to exclude from the analysis.}
 }
 \value{
-Returns A list contains data matrix (matrix) and phenotype indicators (is.case).
+Returns a list containing the data matrix (matrix) and case(1)/control(0) phenotype indicators (is.case).
 }
 \description{
-Read sample file and genotype collipsing matrix in IGM format.
+Read sample file and genotype collapsing matrix in IGM (Insitute for Genomic Medicine, Columbia University) format.
 }
 \examples{
 #igm.data <- igm.read.data(sample.file, matrix.file)
