@@ -43,14 +43,14 @@ estlambda2 <-function (p.o, p.e, plot = FALSE, filter = TRUE, adjust.xy = FALSE,
   p.o[p.o>1] = 1
   p.e[p.e>1] = 1
 
-  p.o <- qchisq(p.o, 1, lower.tail = FALSE)
-  p.e <- qchisq(p.e, 1, lower.tail = FALSE)
-
   if (filter) {
     to.be.removed <- which((abs(p.o) < 1e-08) | (abs(p.e) < 1e-08))
     p.o[to.be.removed] <- NA
     p.e[to.be.removed] <- NA
   }
+
+  p.o <- qchisq(p.o, 1, lower.tail = FALSE)
+  p.e <- qchisq(p.e, 1, lower.tail = FALSE)
 
   p.o <- sort(p.o)
   p.e <- sort(p.e)
